@@ -15,6 +15,12 @@ body {
     background-color: var(--black);
     margin: 0;
     padding: 0;
+    /* Prevent horizontal scroll on mobile */
+    overflow-x: hidden;
+    /* Prevent text size adjustment on orientation change */
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    text-size-adjust: 100%;
 }
 
 .navbar {
@@ -22,9 +28,16 @@ body {
     top: 20px;
     left: 20px;
     z-index: 1000;
+    /* Improve touch target accessibility */
+    touch-action: manipulation;
 }
 
-.menu-bubble {
+/* Ensure the navbar itself isn't transformed or scaled on any page */
+.navbar {
+    transform: none !important;
+}
+
+ .menu-bubble {
     width: 60px;
     height: 60px;
     border-radius: 50%;
@@ -37,6 +50,20 @@ body {
     transition: all 0.3s ease;
     box-shadow: var(--glow-lg) rgba(0, 255, 65, 0.3);
     font-family: var(--font-mono);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    line-height: 1;
+    /* enforce consistent size across pages */
+    width: 60px !important;
+    height: 60px !important;
+    font-size: 24px !important;
+    /* Improve touch responsiveness */
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
 }
 
 .menu-bubble:hover {
@@ -84,6 +111,15 @@ body {
     transition: all 0.2s ease;
     font-weight: bold;
     text-shadow: var(--glow-sm) rgba(0, 255, 65, 0.6);
+    /* Touch-friendly */
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.menu-item {
+    font-size: 16px;
 }
 
 .menu-item:hover {
@@ -101,11 +137,13 @@ body {
     color: var(--primary-green);
     font-size: 48px;
     font-family: var(--font-mono);
-    margin-top: 60px;
-    margin-bottom: 30px;
+    margin-top: 20px;
+    margin-bottom: 18px;
     text-shadow: var(--glow-sm) rgba(0, 255, 65, 0.8), var(--glow-md) rgba(0, 255, 65, 0.6);
     font-weight: bold;
     text-align: center;
+    /* Responsive padding for mobile */
+    padding: 0 20px;
 }
 
 main {
@@ -118,19 +156,368 @@ main {
     align-items: center;
     justify-content: center;
     min-height: 100vh;
+    /* Mobile padding to prevent content from touching edges */
+    padding: 20px;
+    box-sizing: border-box;
+    width: 100%;
 }
 
-main img {
-    width: clamp(160px, 20vw, 320px);
+/* Homepage image styling removed */
+
+/* About page gallery */
+.about-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px 0 60px;
+}
+
+.about-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Social icon links with hover glow */
+.about-gallery a {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.about-gallery a:hover .about-img {
+    box-shadow: var(--glow-lg) rgba(0, 255, 65, 0.8);
+    transform: scale(1.1);
+}
+
+/* Copy tooltip (hidden by default, shown via JS .visible class on desktop only) */
+.copy-tooltip {
+    display: none;
+    position: absolute;
+    bottom: -32px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--dark-grey);
+    color: var(--primary-green);
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    cursor: pointer;
+    border: 1px solid var(--primary-green);
+    font-weight: bold;
+    box-shadow: var(--glow-sm) rgba(0, 255, 65, 0.3);
+    transition: all 0.2s ease;
+    z-index: 10;
+}
+
+.copy-tooltip:hover {
+    background: var(--dark-grey-light);
+    box-shadow: var(--glow-sm) rgba(0, 255, 65, 0.6);
+}
+
+/* Show tooltip when JS adds .visible class (desktop only via @media hover) */
+@media (hover: hover) {
+    .copy-tooltip.visible {
+        display: block;
+    }
+}
+
+.about-img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid var(--primary-green);
+    box-shadow: var(--glow-sm) rgba(0,255,65,0.2);
+    transition: all 0.3s ease;
+}
+
+.about-portrait {
+    display: block;
+    width: auto;
     height: auto;
-    max-width: 90%;
-    object-fit: contain;
+    max-width: 90vw;
+    border-radius: 8px;
+    border: 3px solid var(--primary-green);
+    box-shadow: var(--glow-md) rgba(0,255,65,0.2);
 }
 
-/* Mobile: make the main image appear roughly twice as large on small viewports */
-@media (max-width: 600px) {
-    main img {
-        width: clamp(320px, 40vw, 640px);
-        max-width: 95%;
+.portrait-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0 0;
+}
+
+.about-intro {
+    max-width: 800px;
+    color: var(--primary-green);
+    text-align: center;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .page-title {
+        font-size: 36px;
+    }
+    
+    main {
+        padding: 15px;
+    }
+    
+    .navbar {
+        top: 15px;
+        left: 15px;
+    }
+    
+    /* Slightly larger touch targets on tablets */
+    .menu-item {
+        padding: 14px !important;
+        min-height: 48px;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-title {
+        font-size: 28px;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+    
+    main {
+        padding: 10px;
+        font-size: 14px;
+        line-height: 1.5;
+    }
+    
+    .navbar {
+        top: 10px;
+        left: 10px;
+    }
+    
+    /* Ensure touch targets meet accessibility standards (44x44px minimum) */
+    .menu-bubble {
+        width: 50px !important;
+        height: 50px !important;
+        font-size: 20px !important;
+    }
+    
+    .menu-item {
+        width: 110px !important;
+        padding: 14px 10px !important;
+        font-size: 14px !important;
+        min-height: 44px;
+    }
+    
+    .about-img {
+        width: 72px;
+        height: 72px;
+    }
+    
+    .about-intro {
+        padding: 0 12px;
+        font-size: 14px;
+    }
+    
+    .about-gallery {
+        gap: 12px;
+    }
+}
+
+/* Force consistent menu item sizing */
+.menu-item {
+    width: 120px !important;
+    padding: 12px !important;
+    font-size: 16px !important;
+}
+
+/* Ensure images are responsive */
+main img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Improve link tap targets on mobile */
+a {
+    -webkit-tap-highlight-color: rgba(0, 255, 65, 0.2);
+    touch-action: manipulation;
+}
+
+/* Prevent zoom on input focus (if you add forms later) */
+input, textarea, select {
+    font-size: 16px;
+}
+
+/* Smooth scroll for anchor links */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Portfolio Tile Styles */
+.portfolio-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.portfolio-tile {
+    width: 100%;
+    max-width: 500px;
+    background: var(--dark-grey-dark);
+    border: 2px solid var(--primary-green);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--glow-sm) rgba(0, 255, 65, 0.3);
+    transition: all 0.3s ease;
+}
+
+.portfolio-tile:hover {
+    box-shadow: var(--glow-xl) rgba(0, 255, 65, 0.8);
+    transform: translateY(-5px) scale(1.02);
+}
+
+.tile-image-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    background: var(--black);
+}
+
+.tile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: opacity 0.4s ease;
+}
+
+.tile-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+.tile-image-container:hover .tile-image {
+    opacity: 0;
+}
+
+.tile-image-container:hover .tile-overlay {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.tile-description {
+    color: var(--primary-green);
+    font-family: var(--font-mono);
+    font-size: 14px;
+    line-height: 1.6;
+    text-align: center;
+    margin: 0;
+    user-select: text;
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    text-shadow: var(--glow-sm) rgba(0, 255, 65, 0.6);
+    max-width: 90%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.tile-footer {
+    padding: 15px 20px;
+    background: var(--dark-grey);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: center;
+}
+
+.tile-link {
+    color: var(--primary-green);
+    font-family: var(--font-mono);
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: underline;
+    text-shadow: var(--glow-sm) rgba(0, 255, 65, 0.6);
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.tile-link:hover {
+    color: var(--primary-green);
+    text-shadow: var(--glow-md) rgba(0, 255, 65, 0.9);
+    text-decoration: underline;
+}
+
+.tile-tech {
+    color: var(--primary-green);
+    font-family: var(--font-mono);
+    font-size: 16px;
+    text-shadow: var(--glow-sm) rgba(0, 255, 65, 0.6);
+}
+
+/* Responsive adjustments for portfolio tiles */
+@media (max-width: 768px) {
+    .portfolio-grid {
+        gap: 20px;
+        padding: 15px;
+    }
+    
+    .tile-description {
+        font-size: 13px;
+        padding: 15px;
+    }
+    
+    .tile-link {
+        font-size: 16px;
+    }
+    
+    .tile-tech {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .portfolio-grid {
+        gap: 15px;
+        padding: 10px;
+    }
+    
+    .tile-description {
+        font-size: 12px;
+        padding: 10px;
+    }
+    
+    .tile-footer {
+        padding: 12px 15px;
+    }
+    
+    .tile-link {
+        font-size: 15px;
+    }
+    
+    .tile-tech {
+        font-size: 13px;
     }
 }

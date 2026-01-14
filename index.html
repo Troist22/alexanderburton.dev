@@ -5,25 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Preload nav.html for faster injection -->
+    <link rel="preload" href="nav.html" as="fetch" crossorigin>
+    <!-- Menu listener initialization (define early so nav-loader can call it) -->
     <script src="menu.js"></script>
+    <!-- Load and inject nav (calls initMenuListeners after injection) -->
+    <script src="nav-loader.js"></script>
 </head>
 <body>
-    <nav class="navbar">
-        <button class="menu-bubble" id="menuBtn">M</button>
-        <div class="menu-dropdown" id="menuDropdown">
-            <a href="index.html" class="menu-item menu-title">Menu</a>
-            <a href="aboutme.html" class="menu-item">About me</a>
-            <a href="portfolio.html" class="menu-item">Portfolio</a>
-            <a href="myjourney.html" class="menu-item">My Journey</a>
-            <a href="contactme.html" class="menu-item">Contact me</a>
-        </div>
-    </nav>
-
     <header>
     </header>
 
     <main>
-        <img class="draggable-image" src="assets/images/seedsplash.png" alt="A seed of life symbol with digital circuitry.">
+        <img src="assets/images/seedsplash.png" alt="A seed of life symbol with digital circuitry.">
         <br>
         "Technology expands our way of thinking about things,<br> 
         and expands our way of doing things." <br>

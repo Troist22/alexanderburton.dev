@@ -5,20 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Journey</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Preload nav.html for faster injection -->
+    <link rel="preload" href="nav.html" as="fetch" crossorigin>
+    <!-- Menu listener initialization (define early) -->
     <script src="menu.js"></script>
+    <!-- Load and inject nav -->
+    <script src="nav-loader.js"></script>
 </head>
 <body>
-    <nav class="navbar">
-        <button class="menu-bubble" id="menuBtn">M</button>
-        <div class="menu-dropdown" id="menuDropdown">
-            <a href="index.html" class="menu-item menu-title">Menu</a>
-            <a href="aboutme.html" class="menu-item">About me</a>
-            <a href="portfolio.html" class="menu-item">Portfolio</a>
-            <a href="myjourney.html" class="menu-item">My Journey</a>
-            <a href="contactme.html" class="menu-item">Contact me</a>
-        </div>
-    </nav>
-
     <header>
     </header>
 
