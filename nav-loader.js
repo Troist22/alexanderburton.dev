@@ -7,7 +7,7 @@
 
 (function () {
   // Increment this version to invalidate cache across all browsers
-  const NAV_CACHE_VERSION = '1.1';
+  const NAV_CACHE_VERSION = '1.2';
   const NAV_CACHE_KEY = `navbar_html_cache_v${NAV_CACHE_VERSION}`;
   const NAV_FILE = 'nav.html';
 

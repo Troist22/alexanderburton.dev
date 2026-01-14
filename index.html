@@ -17,7 +17,12 @@
     </header>
 
     <main>
-        <img src="assets/images/seedsplash.png" alt="A seed of life symbol with digital circuitry.">
+        <div style="position: relative; display: inline-block;">
+            <div id="hiddenText" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: var(--primary-green); font-family: var(--font-mono); font-size: 24px; font-weight: bold; text-shadow: 0 0 10px rgba(0, 255, 65, 0.8); text-align: center; white-space: nowrap; pointer-events: none;">
+                Matrix Duck Rides Dragons.
+            </div>
+            <img src="assets/images/seedsplash.png" alt="A seed of life symbol with digital circuitry." id="mainImage" style="cursor: pointer; position: relative; z-index: 1;">
+        </div>
         <br>
         "Technology expands our way of thinking about things,<br> 
         and expands our way of doing things." <br>
@@ -26,5 +31,19 @@
 
     <footer>
     </footer>
+
+    <script>
+        // Toggle image visibility on click
+        const mainImage = document.getElementById('mainImage');
+        if (mainImage) {
+            mainImage.addEventListener('click', function() {
+                if (this.style.opacity === '0') {
+                    this.style.opacity = '1';
+                } else {
+                    this.style.opacity = '0';
+                }
+            });
+        }
+    </script>
 </body>
 </html>

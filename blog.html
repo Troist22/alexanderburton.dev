@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secret Blog</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Preload nav.html for faster injection -->
+    <link rel="preload" href="nav.html" as="fetch" crossorigin>
+    <!-- Menu listener initialization (define early) -->
+    <script src="menu.js"></script>
+    <!-- Load and inject nav -->
+    <script src="nav-loader.js"></script>
+</head>
+<body>
+    <header>
+    </header>
+
+    <main>
+        <h1 class="page-title">🦆 Secret Duck Blog</h1>
+        <p style="color: var(--primary-green); font-family: var(--font-mono); text-align: center; max-width: 800px;">
+            Congratulations! You found the secret duck easter egg.<br><br>
+            This hidden blog will contain exclusive content, thoughts, and experiments.<br><br>
+            <em>More content coming soon...</em>
+        </p>
+    </main>
+
+    <footer>
+    </footer>
+</body>
+</html>

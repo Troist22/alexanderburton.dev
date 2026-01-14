@@ -54,7 +54,54 @@
         </div>
     </main>
 
+    <!-- Draggable Duck Easter Egg -->
+    <img src="assets/images/digitalduck.png" alt="Digital Duck" id="draggableDuck" style="position: fixed; bottom: 20px; right: 20px; width: 80px; height: auto; cursor: grab; z-index: 999;">
+
     <footer>
     </footer>
+
+    <script>
+        // Make the duck draggable
+        const duck = document.getElementById('draggableDuck');
+        const empyreanTile = document.querySelectorAll('.portfolio-tile')[1]; // Second tile
+        let isDragging = false;
+        let offsetX, offsetY;
+
+        duck.addEventListener('mousedown', function(e) {
+            isDragging = true;
+            offsetX = e.clientX - duck.offsetLeft;
+            offsetY = e.clientY - duck.offsetTop;
+            duck.style.cursor = 'grabbing';
+        });
+
+        document.addEventListener('mousemove', function(e) {
+            if (isDragging) {
+                duck.style.left = (e.clientX - offsetX) + 'px';
+                duck.style.top = (e.clientY - offsetY) + 'px';
+                duck.style.bottom = 'auto';
+                duck.style.right = 'auto';
+            }
+        });
+
+        document.addEventListener('mouseup', function(e) {
+            if (isDragging) {
+                isDragging = false;
+                duck.style.cursor = 'grab';
+                
+                // Check if duck is over the Empyrean tile
+                const duckRect = duck.getBoundingClientRect();
+                const tileRect = empyreanTile.getBoundingClientRect();
+                
+                const duckCenterX = duckRect.left + duckRect.width / 2;
+                const duckCenterY = duckRect.top + duckRect.height / 2;
+                
+                if (duckCenterX >= tileRect.left && duckCenterX <= tileRect.right &&
+                    duckCenterY >= tileRect.top && duckCenterY <= tileRect.bottom) {
+                    // Duck dropped on Empyrean tile - navigate to blog
+                    window.location.href = 'blog.html';
+                }
+            }
+        });
+    </script>
 </body>
 </html>

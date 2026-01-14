@@ -342,6 +342,7 @@ main img {
     max-width: 100%;
     height: auto;
     display: block;
+    transition: opacity 0.3s ease;
 }
 
 /* Improve link tap targets on mobile */
