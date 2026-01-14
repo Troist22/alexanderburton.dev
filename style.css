@@ -126,3 +126,11 @@ main img {
     max-width: 90%;
     object-fit: contain;
 }
+
+/* Mobile: make the main image appear roughly twice as large on small viewports */
+@media (max-width: 600px) {
+    main img {
+        width: clamp(320px, 40vw, 640px);
+        max-width: 95%;
+    }
+}
