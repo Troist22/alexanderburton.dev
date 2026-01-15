@@ -66,21 +66,24 @@
         const empyreanTile = document.querySelectorAll('.portfolio-tile')[1]; // Second tile
         let isDragging = false;
         let isPickedUp = false; // For click-to-pickup mode
-        let offsetX, offsetY;
+        let touchIdentifier = null;
+        let startTime = 0;
 
         // Mouse events for desktop drag
         duck.addEventListener('mousedown', function(e) {
             isDragging = true;
-            offsetX = e.clientX - duck.getBoundingClientRect().left;
-            offsetY = e.clientY - duck.getBoundingClientRect().top;
+            const rect = duck.getBoundingClientRect();
+            duck.offsetX = e.clientX - rect.left;
+            duck.offsetY = e.clientY - rect.top;
             duck.style.cursor = 'grabbing';
+            duck.style.transition = 'none';
             e.preventDefault();
         });
 
         document.addEventListener('mousemove', function(e) {
             if (isDragging) {
-                duck.style.left = (e.clientX - offsetX) + 'px';
-                duck.style.top = (e.clientY - offsetY) + 'px';
+                duck.style.left = (e.clientX - duck.offsetX) + 'px';
+                duck.style.top = (e.clientY - duck.offsetY) + 'px';
                 duck.style.bottom = 'auto';
                 duck.style.right = 'auto';
             }
@@ -96,44 +99,91 @@
 
         // Touch events for mobile drag
         duck.addEventListener('touchstart', function(e) {
+            startTime = Date.now();
             const touch = e.touches[0];
-            offsetX = touch.clientX - duck.getBoundingClientRect().left;
-            offsetY = touch.clientY - duck.getBoundingClientRect().top;
+            touchIdentifier = touch.identifier;
+            
+            const rect = duck.getBoundingClientRect();
+            duck.offsetX = touch.clientX - rect.left;
+            duck.offsetY = touch.clientY - rect.top;
+            
             isDragging = true;
+            duck.style.transition = 'none';
+            
             e.preventDefault();
+            e.stopPropagation();
         }, { passive: false });
 
         document.addEventListener('touchmove', function(e) {
-            if (isDragging) {
-                const touch = e.touches[0];
-                duck.style.left = (touch.clientX - offsetX) + 'px';
-                duck.style.top = (touch.clientY - offsetY) + 'px';
-                duck.style.bottom = 'auto';
-                duck.style.right = 'auto';
-                e.preventDefault();
+            if (isDragging || isPickedUp) {
+                // Find our touch point
+                let touch = null;
+                for (let i = 0; i < e.touches.length; i++) {
+                    if (e.touches[i].identifier === touchIdentifier || isPickedUp) {
+                        touch = e.touches[i];
+                        break;
+                    }
+                }
+                
+                if (touch) {
+                    if (isDragging) {
+                        duck.style.left = (touch.clientX - duck.offsetX) + 'px';
+                        duck.style.top = (touch.clientY - duck.offsetY) + 'px';
+                    } else if (isPickedUp) {
+                        const duckWidth = duck.offsetWidth;
+                        const duckHeight = duck.offsetHeight;
+                        duck.style.left = (touch.clientX - duckWidth / 2) + 'px';
+                        duck.style.top = (touch.clientY - duckHeight / 2) + 'px';
+                    }
+                    duck.style.bottom = 'auto';
+                    duck.style.right = 'auto';
+                    
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
             }
         }, { passive: false });
 
         document.addEventListener('touchend', function(e) {
             if (isDragging) {
+                const duration = Date.now() - startTime;
+                
+                // If touch was very short, treat as click for pickup mode
+                if (duration < 200 && !isPickedUp) {
+                    isDragging = false;
+                    isPickedUp = true;
+                    duck.style.opacity = '0.7';
+                    duck.style.transform = 'scale(1.1)';
+                    duck.style.transition = 'all 0.2s ease';
+                    return;
+                }
+                
                 isDragging = false;
+                touchIdentifier = null;
+                checkDuckPlacement();
+            } else if (isPickedUp) {
+                // Drop the duck
+                isPickedUp = false;
+                duck.style.opacity = '1';
+                duck.style.transform = 'scale(1)';
+                duck.style.transition = 'all 0.2s ease';
                 checkDuckPlacement();
             }
-        });
+        }, { passive: false });
 
-        // Click-to-pickup mode (alternative for mobile)
+        // Click-to-pickup mode (desktop fallback)
         duck.addEventListener('click', function(e) {
-            // Don't trigger if we just finished dragging
-            if (isDragging) return;
-            
-            if (!isPickedUp) {
-                // Pick up the duck
+            if (!isPickedUp && !isDragging) {
                 isPickedUp = true;
                 duck.style.opacity = '0.7';
                 duck.style.transform = 'scale(1.1)';
                 duck.style.transition = 'all 0.2s ease';
-            } else {
-                // Drop the duck
+            }
+        });
+
+        // Drop on click anywhere when picked up (desktop)
+        document.addEventListener('click', function(e) {
+            if (isPickedUp && e.target !== duck) {
                 isPickedUp = false;
                 duck.style.opacity = '1';
                 duck.style.transform = 'scale(1)';
@@ -141,7 +191,7 @@
             }
         });
 
-        // Move duck to cursor when picked up (for click mode)
+        // Move duck to cursor when picked up (desktop click mode)
         document.addEventListener('mousemove', function(e) {
             if (isPickedUp && !isDragging) {
                 const duckWidth = duck.offsetWidth;
@@ -152,20 +202,6 @@
                 duck.style.right = 'auto';
             }
         });
-
-        // Move duck to touch point when picked up (for click mode on mobile)
-        document.addEventListener('touchmove', function(e) {
-            if (isPickedUp && !isDragging) {
-                const touch = e.touches[0];
-                const duckWidth = duck.offsetWidth;
-                const duckHeight = duck.offsetHeight;
-                duck.style.left = (touch.clientX - duckWidth / 2) + 'px';
-                duck.style.top = (touch.clientY - duckHeight / 2) + 'px';
-                duck.style.bottom = 'auto';
-                duck.style.right = 'auto';
-                e.preventDefault();
-            }
-        }, { passive: false });
 
         function checkDuckPlacement() {
             // Check if duck is over the Empyrean tile
