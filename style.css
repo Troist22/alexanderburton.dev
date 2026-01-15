@@ -328,6 +328,13 @@ main {
     .about-gallery {
         gap: 12px;
     }
+    
+    /* Make duck more visible and easier to tap on mobile */
+    #draggableDuck {
+        width: 60px !important;
+        bottom: 15px !important;
+        right: 15px !important;
+    }
 }
 
 /* Force consistent menu item sizing */
@@ -520,5 +527,118 @@ html {
     
     .tile-tech {
         font-size: 13px;
+    }
+}
+
+/* Journey/Blog Post Styles */
+.journey-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.journey-post {
+    margin-bottom: 40px;
+    border: 2px solid #7722dd;
+    border-radius: 8px;
+    background: rgba(119, 34, 221, 0.1);
+    overflow: hidden;
+}
+
+.post-header {
+    background: linear-gradient(135deg, #7722dd 0%, #6600cc 100%);
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    transition: all 0.3s ease;
+}
+
+.post-header:hover {
+    background: linear-gradient(135deg, #8833ee 0%, #7711dd 100%);
+    box-shadow: var(--glow-sm) rgba(119, 34, 221, 0.6);
+}
+
+.post-title {
+    color: var(--primary-green);
+    font-family: var(--font-mono);
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+    text-shadow: var(--glow-sm) rgba(0, 255, 65, 0.6);
+}
+
+.post-date {
+    color: rgba(0, 255, 65, 0.95);
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-style: italic;
+}
+
+.post-body {
+    padding: 25px 30px;
+    color: var(--primary-green);
+    font-family: var(--font-mono);
+    line-height: 1.8;
+    max-height: 2000px;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.4s ease, opacity 0.3s ease;
+    opacity: 1;
+}
+
+.journey-post.collapsed .post-body {
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    opacity: 0;
+}
+
+.post-body p {
+    margin: 0 0 15px 0;
+    text-align: left;
+}
+
+.post-body p:last-child {
+    margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+    .journey-container {
+        padding: 15px;
+    }
+    
+    .post-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .post-title {
+        font-size: 20px;
+    }
+    
+    .post-body {
+        padding: 20px 15px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .post-title {
+        font-size: 18px;
+    }
+    
+    .post-date {
+        font-size: 12px;
+    }
+    
+    .post-body {
+        padding: 15px 12px;
+        font-size: 13px;
+        line-height: 1.6;
     }
 }
