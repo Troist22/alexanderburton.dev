@@ -1,0 +1,20 @@
+<nav class="navbar">
+    <button class="menu-bubble" id="menuBtn">Navigate</button>
+    <div class="menu-dropdown" id="menuDropdown">
+        <a href="index_writer.html" class="menu-item menu-title">Home</a>
+        <button class="menu-item" id="writerModeToggle">Coder Mode</button>
+        <a href="about_me_writer.html" class="menu-item">About me</a>
+        <a href="software_writer.html" class="menu-item">Software Projects</a>
+        <a href="myjourneywriter.html" class="menu-item">My Journey</a>
+        <a href="about_me_writer.html#social" class="menu-item">Contact me</a>
+        <button class="menu-item" id="muteToggle">🔊 Sound</button>
+    </div>
+    <div class="volume-control" id="volumeControl">
+        <input type="range" min="0" max="100" value="50" class="volume-slider" id="volumeSlider">
+    </div>
+</nav>
+
+<!-- Background music (persists across page navigation) -->
+<audio id="bgMusic" loop>
+    <source src="assets/music/backgroundsongwriter.mp3" type="audio/mpeg">
+</audio>

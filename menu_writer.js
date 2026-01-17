@@ -1,7 +1,7 @@
 /*
-  menu.js — lightweight navigation menu controller
+  menu_writer.js — lightweight navigation menu controller for writer mode
   Handles click, selection, and outside-click behaviors for the bubble menu.
-  Works with both inline nav and injected nav from nav-loader.js
+  Works with both inline nav and injected nav from nav_loader_writer.js
 */
 
 function initMenuListeners() {
@@ -136,7 +136,7 @@ function initMenuListeners() {
     }
   }
 
-  // Writer Mode toggle
+  // Writer Mode toggle - switches back to coder mode
   if (writerModeToggle) {
     writerModeToggle.addEventListener('click', function (e) {
       e.preventDefault();
@@ -145,15 +145,15 @@ function initMenuListeners() {
       // Get current page name
       const currentPage = window.location.pathname.split('/').pop();
       
-      // Convert from normal pages to writer pages
-      if (currentPage === 'index.html') {
-        window.location.href = 'index_writer.html';
-      } else if (currentPage === 'about_me.html') {
-        window.location.href = 'about_me_writer.html';
-      } else if (currentPage === 'software.html') {
-        window.location.href = 'software_writer.html';
-      } else if (currentPage === 'my_journey.html') {
-        window.location.href = 'myjourneywriter.html';
+      // Convert from writer page to normal page
+      if (currentPage === 'index_writer.html') {
+        window.location.href = 'index.html';
+      } else if (currentPage === 'about_me_writer.html') {
+        window.location.href = 'about_me.html';
+      } else if (currentPage === 'software_writer.html') {
+        window.location.href = 'software.html';
+      } else if (currentPage === 'myjourneywriter.html') {
+        window.location.href = 'my_journey.html';
       }
     });
   }

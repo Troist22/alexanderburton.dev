@@ -1,0 +1,19 @@
+# Git internals
+.git/
+.gitattributes
+
+# IDE/editor configs
+.project
+.settings/
+.vscode/
+.idea/
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Logs / temp
+*.log
+*.tmp
+*.bak
+*.swp

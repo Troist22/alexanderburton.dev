@@ -3,13 +3,20 @@
   - Caches nav.html in localStorage (persists across browser sessions)
   - Cache versioning: invalidate cache by incrementing NAV_CACHE_VERSION
   - Injects once per load; CSS media queries handle responsive behavior
+  - Automatically loads navwriter.html for writer mode pages
 */
 
 (function () {
   // Increment this version to invalidate cache across all browsers
-  const NAV_CACHE_VERSION = '3.1';
-  const NAV_CACHE_KEY = `navbar_html_cache_v${NAV_CACHE_VERSION}`;
-  const NAV_FILE = 'nav.html';
+  const NAV_CACHE_VERSION = '1.3';
+  
+  // Detect if we're on a writer page
+  const currentPage = window.location.pathname.split('/').pop();
+  const isWriterMode = currentPage.includes('writer.html');
+  
+  // Select appropriate nav file
+  const NAV_FILE = isWriterMode ? 'navwriter.html' : 'nav.html';
+  const NAV_CACHE_KEY = `navbar_html_cache_v${NAV_CACHE_VERSION}_${isWriterMode ? 'writer' : 'normal'}`;
 
   async function loadNav() {
     try {

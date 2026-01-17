@@ -1,15 +1,15 @@
 /*
-  nav-loader.js — DRY navigation injection with performance optimization
-  - Caches nav.html in localStorage (persists across browser sessions)
+  nav_loaderwriter.js — DRY navigation injection for writer mode
+  - Caches nav_writer.html in localStorage (persists across browser sessions)
   - Cache versioning: invalidate cache by incrementing NAV_CACHE_VERSION
   - Injects once per load; CSS media queries handle responsive behavior
 */
 
 (function () {
   // Increment this version to invalidate cache across all browsers
-  const NAV_CACHE_VERSION = '3.1';
-  const NAV_CACHE_KEY = `navbar_html_cache_v${NAV_CACHE_VERSION}`;
-  const NAV_FILE = 'nav.html';
+  const NAV_CACHE_VERSION = '1.0';
+  const NAV_CACHE_KEY = `navbar_html_cache_v${NAV_CACHE_VERSION}_writer`;
+  const NAV_FILE = 'nav_writer.html';
 
   async function loadNav() {
     try {

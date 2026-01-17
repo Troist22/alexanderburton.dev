@@ -1,18 +1,22 @@
 :root {
-    --primary-green: #00ff41;
-    --dark-grey-light: #3a3a3a;
-    --dark-grey: #2a2a2a;
-    --dark-grey-dark: #1a1a1a;
-    --black: #000000;
+    --primary-color: #000000;
+    --brown-light: #D4A574;
+    --brown-med: #C19A6B;
+    --brown-dark: #A67C52;
+    --parchment: #FFDFC4;
     --font-mono: 'Courier New', monospace;
-    --glow-sm: 0 0 10px;
-    --glow-md: 0 0 15px;
-    --glow-lg: 0 0 20px;
-    --glow-xl: 0 0 30px;
+    --font-main: Garamond, 'EB Garamond', 'Times New Roman', serif;
+    --shadow-sm: 0 2px 4px;
+    --shadow-md: 0 4px 8px;
+    --shadow-lg: 0 6px 12px;
+    --shadow-xl: 0 8px 16px;
 }
 
 body {
-    background-color: var(--black);
+    background-color: var(--parchment);
+    color: var(--primary-color);
+    font-family: var(--font-main);
+    font-weight: 515;
     margin: 0;
     padding: 0;
     /* Prevent horizontal scroll on mobile */
@@ -32,18 +36,18 @@ body {
     transform: none !important;
 }
 
- .menu-bubble {
-    width: 80px;
+.menu-bubble {
+    width: 121px;
     height: 50px;
     border-radius: 12px;
-    background: linear-gradient(135deg, var(--dark-grey) 0%, var(--dark-grey-dark) 100%);
-    color: var(--primary-green);
-    border: 1px solid rgba(0, 255, 65, 0.3);
+    background-color: var(--brown-med);
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
     font-size: 26px;
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: var(--glow-lg) rgba(0, 255, 65, 0.3);
+    box-shadow: var(--shadow-lg) rgba(0, 0, 0, 0.3);
     font-family: var(--font-mono);
     display: flex;
     align-items: center;
@@ -51,7 +55,7 @@ body {
     box-sizing: border-box;
     line-height: 1;
     /* enforce consistent size across pages */
-    width: 80px !important;
+    width: 121px !important;
     height: 50px !important;
     font-size: 20px !important;
     /* Improve touch responsiveness */
@@ -62,14 +66,15 @@ body {
 }
 
 .menu-bubble:hover {
-    box-shadow: var(--glow-xl) rgba(0, 255, 65, 0.5);
+    box-shadow: var(--shadow-xl) rgba(0, 0, 0, 0.5);
     transform: scale(1.1);
+    background-color: var(--brown-light);
 }
 
 .menu-bubble.active {
-    background: linear-gradient(135deg, var(--dark-grey) 0%, var(--dark-grey-dark) 100%);
-    color: var(--primary-green);
-    box-shadow: var(--glow-xl) rgba(0, 255, 65, 0.3);
+    background-color: var(--brown-med);
+    color: var(--primary-color);
+    box-shadow: var(--shadow-xl) rgba(0, 0, 0, 0.3);
     opacity: 0;
     pointer-events: none;
 }
@@ -96,19 +101,17 @@ body {
 .menu-item {
     width: 120px;
     padding: 12px;
-    background: linear-gradient(135deg, var(--dark-grey) 0%, var(--dark-grey-dark) 100%);
-    color: var(--primary-green);
+    background: linear-gradient(135deg, var(--brown-light) 0%, var(--brown-med) 100%);
+    color: var(--primary-color);
     text-decoration: none;
     font-family: var(--font-mono);
     text-align: center;
     border-radius: 8px;
-    border: 1px solid rgba(0, 255, 65, 0.3);
+    border: 2px solid var(--primary-color);
     cursor: pointer;
     transition: all 0.2s ease;
     font-weight: bold;
     font-size: 18px;
-    text-shadow: var(--glow-sm) rgba(0, 255, 65, 0.6);
-    box-shadow: var(--glow-sm) rgba(0, 255, 65, 0.2);
     -webkit-tap-highlight-color: transparent;
     touch-action: manipulation;
     user-select: none;
@@ -116,10 +119,9 @@ body {
 }
 
 .menu-item:hover {
-    background: linear-gradient(135deg, var(--dark-grey-light) 0%, var(--dark-grey) 100%);
-    box-shadow: var(--glow-md) rgba(0, 255, 65, 0.8);
+    background: linear-gradient(135deg, var(--brown-light) 0%, var(--brown-dark) 100%);
+    box-shadow: var(--shadow-md) rgba(0, 0, 0, 0.4);
     transform: scale(1.05);
-    text-shadow: var(--glow-sm) rgba(0, 255, 65, 0.9);
 }
 
 .menu-title {
@@ -143,17 +145,17 @@ body {
 .volume-control {
     position: absolute;
     left: 156px;
-    top: 301px;
+    top: 311px;
     height: 48px;
     width: 120px;
-    background: linear-gradient(135deg, var(--dark-grey) 0%, var(--dark-grey-dark) 100%);
+    background: linear-gradient(135deg, var(--brown-med) 0%, var(--brown-dark) 100%);
     border-radius: 12px;
     display: none;
     align-items: center;
     justify-content: center;
     padding: 0 15px;
     box-shadow: var(--shadow-sm) rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(0, 255, 65, 0.3);
+    border: 2px solid var(--primary-color);
     z-index: 1001;
 }
 
@@ -164,7 +166,7 @@ body {
 .volume-slider {
     width: 100%;
     height: 4px;
-    background: rgba(0, 255, 65, 0.3);
+    background: rgba(0, 0, 0, 0.2);
     outline: none;
     border-radius: 2px;
     -webkit-appearance: none;
@@ -176,29 +178,28 @@ body {
     appearance: none;
     width: 16px;
     height: 16px;
-    background: var(--primary-green);
+    background: var(--parchment);
     cursor: pointer;
     border-radius: 50%;
-    box-shadow: 0 0 6px rgba(0, 255, 65, 0.6), 0 2px 4px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .volume-slider::-moz-range-thumb {
     width: 16px;
     height: 16px;
-    background: var(--primary-green);
+    background: var(--parchment);
     cursor: pointer;
     border-radius: 50%;
     border: none;
-    box-shadow: 0 0 6px rgba(0, 255, 65, 0.6), 0 2px 4px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .page-title {
-    color: var(--primary-green);
+    color: var(--primary-color);
     font-size: 50px;
     font-family: var(--font-mono);
     margin-top: 20px;
     margin-bottom: 18px;
-    text-shadow: var(--glow-sm) rgba(0, 255, 65, 0.8), var(--glow-md) rgba(0, 255, 65, 0.6);
     font-weight: bold;
     text-align: center;
     /* Responsive padding for mobile */
@@ -206,9 +207,8 @@ body {
 }
 
 main {
-    color: var(--primary-green);
-    text-shadow: var(--glow-sm) var(--primary-green), var(--glow-md) var(--primary-green);
-    font-family: var(--font-mono);
+    color: var(--primary-color);
+    font-family: var(--font-main);
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -220,8 +220,6 @@ main {
     box-sizing: border-box;
     width: 100%;
 }
-
-/* Homepage image styling removed */
 
 /* About page gallery */
 .about-section {
@@ -241,7 +239,7 @@ main {
     align-items: center;
 }
 
-/* Social icon links with hover glow */
+/* Social icon links with hover effect */
 .about-gallery a {
     position: relative;
     display: inline-block;
@@ -249,7 +247,7 @@ main {
 }
 
 .about-gallery a:hover .about-img {
-    box-shadow: var(--glow-lg) rgba(0, 255, 65, 0.8);
+    box-shadow: none;
     transform: scale(1.1);
 }
 
@@ -260,23 +258,23 @@ main {
     bottom: -32px;
     left: 50%;
     transform: translateX(-50%);
-    background: var(--dark-grey);
-    color: var(--primary-green);
+    background: #623B18;
+    color: #D4AF37;
     padding: 6px 10px;
     border-radius: 4px;
     font-size: 14px;
     white-space: nowrap;
     cursor: pointer;
-    border: 1px solid var(--primary-green);
+    border: 1px solid #594939;
     font-weight: bold;
-    box-shadow: var(--glow-sm) rgba(0, 255, 65, 0.3);
+    box-shadow: var(--shadow-sm) rgba(0, 0, 0, 0.3);
     transition: all 0.2s ease;
     z-index: 10;
 }
 
 .copy-tooltip:hover {
-    background: var(--dark-grey-light);
-    box-shadow: var(--glow-sm) rgba(0, 255, 65, 0.6);
+    background: #2C241E;
+    box-shadow: var(--shadow-sm) rgba(0, 0, 0, 0.5);
 }
 
 /* Show tooltip when JS adds .visible class (desktop only via @media hover) */
@@ -291,8 +289,8 @@ main {
     height: 100px;
     object-fit: cover;
     border-radius: 8px;
-    border: 2px solid var(--primary-green);
-    box-shadow: var(--glow-sm) rgba(0,255,65,0.2);
+    border: none;
+    box-shadow: none;
     transition: all 0.3s ease;
 }
 
@@ -301,8 +299,8 @@ main {
     width: auto;
     height: auto;
     border-radius: 8px;
-    border: 3px solid var(--primary-green);
-    box-shadow: var(--glow-md) rgba(0,255,65,0.2);
+    border: 3px solid var(--primary-color);
+    box-shadow: var(--shadow-md) rgba(0, 0, 0, 0.2);
 }
 
 .portrait-container {
@@ -314,7 +312,7 @@ main {
 
 .about-intro {
     max-width: 800px;
-    color: var(--primary-green);
+    color: var(--primary-color);
     text-align: center;
     font-size: 18px;
     line-height: 1.6;
@@ -361,7 +359,7 @@ main {
     
     /* Ensure touch targets meet accessibility standards (44x44px minimum) */
     .menu-bubble {
-        width: 70px !important;
+        width: 111px !important;
         height: 44px !important;
         font-size: 18px !important;
     }
@@ -412,7 +410,7 @@ main img {
 
 /* Improve link tap targets on mobile */
 a {
-    -webkit-tap-highlight-color: rgba(0, 255, 65, 0.2);
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
     touch-action: manipulation;
 }
 
@@ -440,16 +438,16 @@ html {
 .portfolio-tile {
     width: 100%;
     max-width: 500px;
-    background: var(--dark-grey-dark);
-    border: 2px solid var(--primary-green);
+    background: var(--brown-dark);
+    border: 2px solid var(--primary-color);
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: var(--glow-sm) rgba(0, 255, 65, 0.3);
+    box-shadow: var(--shadow-sm) rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
 }
 
 .portfolio-tile:hover {
-    box-shadow: var(--glow-xl) rgba(0, 255, 65, 0.8);
+    box-shadow: var(--shadow-xl) rgba(0, 0, 0, 0.5);
     transform: translateY(-5px) scale(1.02);
 }
 
@@ -458,7 +456,7 @@ html {
     width: 100%;
     aspect-ratio: 16/9;
     overflow: hidden;
-    background: var(--black);
+    background: var(--brown-dark);
 }
 
 .tile-image {
@@ -475,7 +473,7 @@ html {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.95);
+    background: var(--parchment);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -495,7 +493,7 @@ html {
 }
 
 .tile-description {
-    color: var(--primary-green);
+    color: var(--primary-color);
     font-family: var(--font-mono);
     font-size: 16px;
     line-height: 1.6;
@@ -504,7 +502,6 @@ html {
     user-select: text;
     -webkit-user-select: text;
     -moz-user-select: text;
-    text-shadow: var(--glow-sm) rgba(0, 255, 65, 0.6);
     max-width: 90%;
     word-wrap: break-word;
     overflow-wrap: break-word;
@@ -512,7 +509,7 @@ html {
 
 .tile-footer {
     padding: 15px 20px;
-    background: var(--dark-grey);
+    background: var(--brown-med);
     display: flex;
     align-items: center;
     gap: 8px;
@@ -520,27 +517,24 @@ html {
 }
 
 .tile-link {
-    color: var(--primary-green);
+    color: var(--primary-color);
     font-family: var(--font-mono);
     font-size: 20px;
     font-weight: bold;
     text-decoration: underline;
-    text-shadow: var(--glow-sm) rgba(0, 255, 65, 0.6);
     transition: all 0.2s ease;
     cursor: pointer;
 }
 
 .tile-link:hover {
-    color: var(--primary-green);
-    text-shadow: var(--glow-md) rgba(0, 255, 65, 0.9);
+    color: var(--brown-dark);
     text-decoration: underline;
 }
 
 .tile-tech {
-    color: var(--primary-green);
+    color: var(--primary-color);
     font-family: var(--font-mono);
     font-size: 18px;
-    text-shadow: var(--glow-sm) rgba(0, 255, 65, 0.6);
 }
 
 /* Responsive adjustments for portfolio tiles */
@@ -597,14 +591,14 @@ html {
 
 .journey-post {
     margin-bottom: 40px;
-    border: 2px solid #7722dd;
+    border: 2px solid var(--brown-dark);
     border-radius: 8px;
-    background: rgba(119, 34, 221, 0.1);
+    background: rgba(107, 63, 27, 0.1);
     overflow: hidden;
 }
 
 .post-header {
-    background: linear-gradient(135deg, #7722dd 0%, #6600cc 100%);
+    background: var(--brown-med);
     padding: 15px 20px;
     display: flex;
     justify-content: space-between;
@@ -615,24 +609,24 @@ html {
     user-select: none;
     -webkit-user-select: none;
     transition: all 0.3s ease;
+    border-bottom: 2px solid var(--primary-color);
 }
 
 .post-header:hover {
-    background: linear-gradient(135deg, #8833ee 0%, #7711dd 100%);
-    box-shadow: var(--glow-sm) rgba(119, 34, 221, 0.6);
+    background: var(--brown-light);
+    box-shadow: var(--shadow-sm) rgba(0, 0, 0, 0.3);
 }
 
 .post-title {
-    color: var(--primary-green);
+    color: var(--primary-color);
     font-family: var(--font-mono);
     font-size: 26px;
     font-weight: bold;
     margin: 0;
-    text-shadow: var(--glow-sm) rgba(0, 255, 65, 0.6);
 }
 
 .post-date {
-    color: rgba(0, 255, 65, 0.95);
+    color: var(--primary-color);
     font-family: var(--font-mono);
     font-size: 16px;
     font-style: italic;
@@ -640,8 +634,9 @@ html {
 
 .post-body {
     padding: 25px 30px;
-    color: var(--primary-green);
-    font-family: var(--font-mono);
+    color: var(--primary-color);
+    font-family: var(--font-main);
+    font-weight: 515;
     line-height: 1.8;
     max-height: 2000px;
     overflow: hidden;
