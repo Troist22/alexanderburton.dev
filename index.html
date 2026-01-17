@@ -3,46 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alexander's Portfolio</title>
+    <meta name="description" content="Alexander Burton - Full Stack Developer and software engineer in Indianapolis. Computer repair specialist with 5+ years experience in programming, web development, and systems design.">
+    <meta name="keywords" content="Full Stack Developer, Software Engineer, Web Developer, Indianapolis, Programming, HTML, CSS, JavaScript, C#, Python, Web Development">
+    <meta name="author" content="Alexander Burton">
+    <meta name="theme-color" content="#000000">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Alexander Burton - Full Stack Developer & Software Engineer">
+    <meta property="og:description" content="Portfolio of Alexander Burton: Full Stack Developer in Indianapolis specializing in web development and software engineering.">
+    <meta property="og:site_name" content="Alexander Burton">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://alexander.burton.dev/">
+    
+    <title>Alexander Burton - Full Stack Developer & Software Engineer in Indianapolis</title>
+    
+    <!-- STYLES: Global stylesheet with color variables and responsive design -->
     <link rel="stylesheet" href="style.css?v=2">
-    <!-- Preload nav.html for faster injection -->
+    
+    <!-- PRELOAD: Hint browser to fetch nav.html early (improves perceived performance) -->
     <link rel="preload" href="nav.html" as="fetch" crossorigin>
-    <!-- Menu listener initialization (define early so nav-loader can call it) -->
+    
+    <!-- MENU LOGIC: Define initMenuListeners() before nav-loader calls it -->
+    <!-- This script defines the function that attaches click handlers to menu -->
+    <!-- Must load BEFORE nav-loader.js so function is available globally -->
     <script src="menu.js"></script>
-    <!-- Load and inject nav (calls initMenuListeners after injection) -->
+    
+    <!-- NAV LOADER: Dynamically inject nav.html and call initMenuListeners() -->
+    <!-- nav-loader.js fetches nav.html, caches it, injects into <body>, then calls menu.js -->
+    <!-- This approach allows nav to be reused across all pages without copy-paste -->
     <script src="nav-loader.js"></script>
 </head>
 <body>
+    <!-- HEADER: Reserved for nav-loader.js to inject navigation here -->
     <header>
     </header>
 
+    <!-- MAIN CONTENT -->
     <main>
+        <!-- Layered image container with hidden text overlay -->
         <div style="position: relative; display: inline-block;">
+            <!-- Hidden text that appears when image is clicked -->
             <div id="hiddenText" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: var(--primary-green); font-family: var(--font-mono); font-size: 24px; font-weight: bold; text-shadow: 0 0 10px rgba(0, 255, 65, 0.8); text-align: center; white-space: nowrap; pointer-events: none;">
                 Matrix Duck Rides Dragons.
             </div>
+            <!-- Main image: click to toggle visibility of hidden text -->
             <img src="assets/images/seedsplash.png" alt="A seed of life symbol with digital circuitry." id="mainImage" style="cursor: pointer; position: relative; z-index: 1;">
         </div>
         <br>
+        <!-- Quote section -->
         "Technology expands our way of thinking about things,<br> 
         and expands our way of doing things." <br>
         Herbert A. Simon
     </main>
 
+    <!-- FOOTER: Reserved for future content or nav injection -->
     <footer>
     </footer>
 
+    <!-- PAGE INTERACTION: Toggle image opacity on click -->
     <script>
-        // Toggle image visibility on click
+        // Get reference to the main image element
         const mainImage = document.getElementById('mainImage');
+        
         if (mainImage) {
-            mainImage.addEventListener('click', function() {
-                if (this.style.opacity === '0') {
-                    this.style.opacity = '1';
-                } else {
-                    this.style.opacity = '0';
-                }
-            });
+          // Attach click handler to toggle image visibility
+          mainImage.addEventListener('click', function() {
+            // Toggle opacity between 0 (invisible) and 1 (visible)
+            if (this.style.opacity === '0') {
+              this.style.opacity = '1';      // Make visible
+            } else {
+              this.style.opacity = '0';      // Make invisible
+            }
+          });
         }
     </script>
 </body>
