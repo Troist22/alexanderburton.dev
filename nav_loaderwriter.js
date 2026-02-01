@@ -25,7 +25,7 @@
   // ─────────────────────────────────────────────────────────────
   // CONFIGURATION: Update this when nav_writer.html structure changes
   // ─────────────────────────────────────────────────────────────
-  const NAV_CACHE_VERSION = '3.2';
+  const NAV_CACHE_VERSION = '4.2';
   const NAV_FILE_NAME = 'nav_writer.html';
   const STORAGE_KEY = `navbar_html_cache_v${NAV_CACHE_VERSION}_writer`;
 

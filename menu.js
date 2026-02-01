@@ -40,6 +40,7 @@ const WRITER_MODE_PAGE_MAP = Object.freeze({
   'index.html': 'index_writer.html',
   'about_me.html': 'about_me_writer.html',
   'software.html': 'software_writer.html',
+  'editing_animations.html': 'editing_animations_writer.html',
   'my_journey.html': 'myjourneywriter.html'
 });
 

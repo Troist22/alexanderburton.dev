@@ -152,6 +152,8 @@ function initMenuListeners() {
         window.location.href = 'about_me.html';
       } else if (currentPage === 'software_writer.html') {
         window.location.href = 'software.html';
+      } else if (currentPage === 'editing_animations_writer.html') {
+        window.location.href = 'editing_animations.html';
       } else if (currentPage === 'myjourneywriter.html') {
         window.location.href = 'my_journey.html';
       }

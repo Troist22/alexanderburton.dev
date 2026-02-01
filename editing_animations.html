@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Video Editing, 3D Modeling and Animations by Alexander Burton - Portfolio showcasing video editing, 3D modeling, animation projects using professional tools and creative techniques.">
+    <meta name="keywords" content="Video Editing, 3D Modeling, Animations, Portfolio, Video Production, Blender, Motion Graphics, 3D Animation, Creative Projects">
+    <meta name="author" content="Alexander Burton">
+    <meta name="geo.region" content="US-IN">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Video Editing, Modeling & Animations - Alexander Burton Creative Portfolio">
+    <meta property="og:description" content="Explore Alexander Burton's video editing, 3D modeling, and animation projects featuring professional and creative work.">
+    <meta property="og:site_name" content="Alexander Burton">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://alexander.burton.dev/editing_animations.html">
+    
+    <title>Video Editing, Modeling & Animations - Creative Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Preload nav.html for faster injection -->
+    <link rel="preload" href="nav.html" as="fetch" crossorigin>
+    <!-- Menu listener initialization (define early) -->
+    <script src="menu.js"></script>
+    <!-- Load and inject nav -->
+    <script src="nav-loader.js"></script>
+</head>
+<body>
+    <header>
+    </header>
+
+    <main>
+        <h1 class="page-title" style="margin-top: 80px; margin-bottom: 40px;">Video Editing, Modeling & Animations</h1>
+        
+        <div class="portfolio-grid">
+            <!-- Ren - Vincent's Tale Project -->
+            <div class="portfolio-tile video-project" id="renVincentTile">
+                <div class="tile-image-container">
+                    <img src="assets/thumbnails/rennail.png" alt="Ren - Vincent's Tale: Starry Night" class="tile-image">
+                    <div class="tile-overlay video-overlay">
+                        <p class="tile-description">
+                            <strong>Original Song & Artist:</strong><br>
+                            Ren - Vincent's Tale: Starry Night<br>
+                            <a href="https://www.youtube.com/watch?v=MTn_bhTVr2U" target="_blank" rel="noopener noreferrer" style="color: #00ff41; text-decoration: underline;">Watch Original on YouTube</a><br>
+                            <br>
+                            <strong>My Note:</strong><br>
+                            First time editing anything with DaVinci Resolve. Mostly to familiarize myself with the software. This is purely for demonstration and academic purposes.
+                        </p>
+                    </div>
+                </div>
+                <div class="tile-footer">
+                    <a href="#" class="tile-link video-link" id="playVideoBtn">Ren - Vincent's Tale</a>
+                    <span class="tile-tech">(EDITING)</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Video Player Modal -->
+    <div id="videoModal" class="video-modal" style="display: none;">
+        <div class="video-modal-content">
+            <button class="video-close-btn" id="closeVideoBtn">&times;</button>
+            <button class="video-fullscreen-btn" id="fullscreenBtn" title="Fullscreen">⛶</button>
+            
+            <div class="video-container">
+                <video id="videoPlayer" controls>
+                    <source src="assets/videos/ren_my_cut.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            
+            <div class="video-info">
+                <h3>Ren - Vincent's Tale: Starry Night (Edited)</h3>
+                <p>Edited version for demonstration and academic purposes.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Draggable Duck Easter Egg -->
+    <img src="assets/images/digitalduck.png" alt="Digital Duck" id="draggableDuck" style="position: fixed; bottom: 20px; right: 20px; width: 80px; height: auto; cursor: grab; z-index: 998; touch-action: none; -webkit-user-select: none; user-select: none;">
+
+    <footer>
+    </footer>
+
+    <script>
+        // Video player modal controls
+        const videoModal = document.getElementById('videoModal');
+        const videoPlayer = document.getElementById('videoPlayer');
+        const playVideoBtn = document.getElementById('playVideoBtn');
+        const closeVideoBtn = document.getElementById('closeVideoBtn');
+        const fullscreenBtn = document.getElementById('fullscreenBtn');
+        const renVincentTile = document.getElementById('renVincentTile');
+
+        // Open video modal on link click
+        playVideoBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            videoModal.style.display = 'flex';
+            videoPlayer.focus();
+        });
+
+        // Open video modal on tile click
+        renVincentTile.addEventListener('click', function(e) {
+            if (e.target !== playVideoBtn && e.target.tagName !== 'A') {
+                e.preventDefault();
+                videoModal.style.display = 'flex';
+                videoPlayer.focus();
+            }
+        });
+
+        // Close modal
+        closeVideoBtn.addEventListener('click', function() {
+            videoModal.style.display = 'none';
+            videoPlayer.pause();
+        });
+
+        // Close modal when clicking outside video content
+        videoModal.addEventListener('click', function(e) {
+            if (e.target === videoModal) {
+                videoModal.style.display = 'none';
+                videoPlayer.pause();
+            }
+        });
+
+        // Fullscreen button
+        fullscreenBtn.addEventListener('click', function() {
+            if (videoPlayer.requestFullscreen) {
+                videoPlayer.requestFullscreen();
+            } else if (videoPlayer.webkitRequestFullscreen) {
+                videoPlayer.webkitRequestFullscreen();
+            }
+        });
+
+        // Duck drag functionality - simplified for better mobile support
+        const duck = document.getElementById('draggableDuck');
+        const renTile = document.getElementById('renVincentTile');
+        
+        let active = false;
+        let currentX;
+        let currentY;
+        let initialX;
+        let initialY;
+        let xOffset = 0;
+        let yOffset = 0;
+
+        // Mouse events
+        duck.addEventListener('mousedown', dragStart, false);
+        document.addEventListener('mouseup', dragEnd, false);
+        document.addEventListener('mousemove', drag, false);
+
+        // Touch events
+        duck.addEventListener('touchstart', dragStart, { passive: false });
+        document.addEventListener('touchend', dragEnd, { passive: false });
+        document.addEventListener('touchmove', drag, { passive: false });
+
+        function dragStart(e) {
+            if (e.type === 'touchstart') {
+                initialX = e.touches[0].clientX - xOffset;
+                initialY = e.touches[0].clientY - yOffset;
+            } else {
+                initialX = e.clientX - xOffset;
+                initialY = e.clientY - yOffset;
+            }
+
+            if (e.target === duck) {
+                active = true;
+                duck.style.cursor = 'grabbing';
+                e.preventDefault();
+            }
+        }
+
+        function dragEnd(e) {
+            if (active) {
+                initialX = currentX;
+                initialY = currentY;
+                active = false;
+                duck.style.cursor = 'grab';
+                
+                // Check collision with Ren tile
+                const duckRect = duck.getBoundingClientRect();
+                const tileRect = renTile.getBoundingClientRect();
+                
+                const duckCenterX = duckRect.left + duckRect.width / 2;
+                const duckCenterY = duckRect.top + duckRect.height / 2;
+                
+                if (duckCenterX >= tileRect.left && duckCenterX <= tileRect.right &&
+                    duckCenterY >= tileRect.top && duckCenterY <= tileRect.bottom) {
+                    window.location.href = 'blog.html';
+                }
+            }
+        }
+
+        function drag(e) {
+            if (active) {
+                e.preventDefault();
+                
+                if (e.type === 'touchmove') {
+                    currentX = e.touches[0].clientX - initialX;
+                    currentY = e.touches[0].clientY - initialY;
+                } else {
+                    currentX = e.clientX - initialX;
+                    currentY = e.clientY - initialY;
+                }
+
+                xOffset = currentX;
+                yOffset = currentY;
+
+                setTranslate(currentX, currentY, duck);
+            }
+        }
+
+        function setTranslate(xPos, yPos, el) {
+            el.style.transform = 'translate3d(' + xPos + 'px, ' + yPos + 'px, 0)';
+        }
+    </script>
+</body>
+</html>

@@ -25,6 +25,7 @@ I have two versions of important files. One for live (index.html), one for testi
 | Home page | `index.html` | `index_writer.html` | Edit and test locally first |
 | About page | `about_me.html` | `about_me_writer.html` | Don't break the live site |
 | Projects page | `software.html` | `software_writer.html` | Same reason |
+| Video page | `editing_animations.html` | `editing_animations_writer.html` | Same reason |
 | Blog | `my_journey.html` | `myjourneywriter.html` | Same reason |
 | Menu | `nav.html` | `nav_writer.html` | Test menu changes |
 | Menu logic | `menu.js` | `menu_writer.js` | Debug without affecting live |
@@ -144,8 +145,6 @@ This is the full HTML of the menu. Cached so the next page load doesn't have to 
 3. Open that file in your browser
 4. Check that it looks good
 5. Copy the changes to the live `my_journey.html`
-6. Push to git
-7. Done
 
 ### Let's say you want to change the menu
 
@@ -155,8 +154,7 @@ This is the full HTML of the menu. Cached so the next page load doesn't have to 
 4. Check that the menu looks right and works
 5. Copy both files to production (`nav.html`, `nav-loader.js`)
 6. Bump the version in the production `nav-loader.js` too
-7. Push to git
-8. Users get the new menu next time they refresh
+7. Users get the new menu next time they refresh
 
 ---
 
@@ -186,6 +184,80 @@ Mobile-specific stuff already implemented:
 - Text doesn't zoom when rotating phone
 - Tap response is fast
 - Menu works with touch
+
+---
+
+## Adding Video Projects
+
+### File Structure
+Videos go in `assets/videos/` and thumbnails in `assets/thumbnails/`.
+
+Example:
+```
+assets/
+├── videos/
+│   └── ren_my_cut.mp4
+└── thumbnails/
+    └── rennail.png
+```
+
+### Steps to Add a New Video
+
+1. **Create the writer version first**
+   - Copy `editing_animations_writer.html`
+   - Update the video file path in the `<video>` source tag
+   - Update the thumbnail image path
+   - Change the project title, description, and info text
+   - Add any additional project details
+
+2. **Add assets**
+   - Export your video as .mp4 (best browser compatibility)
+   - Create a thumbnail image (PNG or JPG)
+   - Place video in `assets/videos/`
+   - Place thumbnail in `assets/thumbnails/`
+
+3. **Test in writer mode**
+   - Open the _writer.html file in your browser
+   - Click the video tile to open the modal
+   - Test play, pause, fullscreen, and progress slider
+   - Verify thumbnail displays correctly
+
+4. **Copy to production**
+   - When satisfied, copy the HTML file to production (remove _writer suffix)
+   - Update the image references if needed (e.g., digitalduck.png → digitalduck.png)
+   - No need to update menu if staying on the same page
+
+5. **Update the menu if needed**
+   - If adding a new portfolio category, edit `nav_writer.html`
+   - Add new menu link
+   - Bump version in `nav_loaderwriter.js`
+   - Test, then copy to production and update `nav.html` and `nav-loader.js`
+
+### Video Player Modal Structure
+
+The modal is built with:
+- `#videoModal` - Container for the entire modal
+- `<video>` element with native controls
+- `#closeVideoBtn` - Close button (×)
+- `#fullscreenBtn` - Fullscreen button (⛶)
+- `.video-info` - Project description and details
+
+All styling is in `style.css` (or `style_writer.css` for testing).
+
+### Video Format Notes
+
+- **Recommended:** MP4 with H.264 codec
+- **MIME type:** `video/mp4`
+- **Alternative:** WebM for smaller file sizes (less browser support on older devices)
+- **Avoid:** MOV files (poor browser compatibility)
+
+### Project Tile Structure
+
+Each project is a `<div class="portfolio-tile">` with:
+- Thumbnail image (background)
+- Overlay with description on hover
+- Footer with project title and technology tag
+- Click handler to open video modal
 
 ---
 
@@ -225,27 +297,6 @@ localStorage.clear()
 
 // Does the menu function exist?
 window.initMenuListeners
-```
-
----
-
-## Git Workflow
-
-```bash
-# Start working on something
-git checkout -b feature/add-blog-post
-
-# Make changes to _writer files
-# Test them
-# Copy to production files
-# Bump cache versions if needed
-
-git add .
-git commit -m "Add blog post: whatever the topic is"
-git push origin feature/add-blog-post
-
-# Make a pull request, merge to main
-# Live site auto-updates
 ```
 
 ---

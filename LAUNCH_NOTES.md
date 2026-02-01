@@ -1,18 +1,21 @@
 # Launch Notes - January 2026
 
 Site: https://alexander.burton.dev
-Launched: January 16, 2026
-Status: Live one week
+Initially Launched: January 16, 2026
+Status: Live and actively updated
+Last Update: February 1, 2026 - Video Editing page launch
 
 ## What's Working
 
-- 4 main pages (home, about, portfolio, blog)
+- 5 main pages (home, about, software projects, video editing, blog)
 - Menu loads from cache (faster)
 - Background music that saves where you left off
 - Safe mode for testing changes without breaking live site
 - Works on phones and computers
 - Search engine stuff (keywords, metadata)
 - No special frameworks or dependencies
+- Video player with HTML5 controls in modal
+- Easter eggs (draggable duck)
 
 ---
 
@@ -49,16 +52,17 @@ No sketchy stuff. Just honest keywords that match the page content.
 Live versions end with nothing. Testing versions end with _writer.
 
 ```
-Live site              Testing version        What it does
-─────────────────      ──────────────────     ─────────────
-index.html       →     index_writer.html      Homepage
-about_me.html    →     about_me_writer.html   About page
-software.html    →     software_writer.html   Projects page
-my_journey.html  →     myjourneywriter.html   Blog posts
-nav.html         →     nav_writer.html        Menu
-style.css        →     style_writer.css       Colors and layout
-menu.js          →     menu_writer.js         Menu buttons work
-nav-loader.js    →     nav_loaderwriter.js    Menu injection
+Live site                    Testing version              What it does
+─────────────────            ──────────────────           ─────────────
+index.html            →      index_writer.html            Homepage
+about_me.html         →      about_me_writer.html         About page
+software.html         →      software_writer.html         Projects page
+editing_animations.html →    editing_animations_writer.html   Video page
+my_journey.html       →      myjourneywriter.html         Blog posts
+nav.html              →      nav_writer.html              Menu
+style.css             →      style_writer.css             Colors and layout
+menu.js               →      menu_writer.js               Menu buttons work
+nav-loader.js         →      nav_loaderwriter.js          Menu injection
 ```
 
 Edit the _writer versions. Test them. Then copy to the live versions when they're good.
@@ -74,12 +78,21 @@ Edit the _writer versions. Test them. Then copy to the live versions when they'r
 4. Copy it to `my_journey.html`
 5. Commit to git
 
+### Adding a Video Project
+1. Create a new `editing_animations_writer.html` (or similar)
+2. Add video files to `assets/videos/`
+3. Add thumbnail to `assets/thumbnails/`
+4. Test in writer mode
+5. Copy to production when ready
+6. Update menu if adding new portfolio category
+
 ### Updating the Menu
 1. Edit `nav_writer.html`
-2. Change the version number in `nav_loaderwriter.js` (3.2 → 3.3)
+2. Change the version number in `nav_loaderwriter.js` (currently at 4.2)
 3. Test in browser
 4. Copy both files to the live versions (`nav.html` and `nav-loader.js`)
-5. Users will get the new menu on their next page load
+5. Also update version in `nav-loader.js` on production side
+6. Users will get the new menu on their next page load
 
 ### Changing Colors
 Edit `style.css` and find the `:root` section at the top. Change the color values. Everything updates automatically.
@@ -216,8 +229,37 @@ The site updates automatically on the next page load. Cache invalidation happens
 ## Version Status
 
 Current state:
-- Production cache version: 3.2
-- Writer cache version: 3.2
+- Production cache version: 4.1
+- Writer cache version: 4.2
 - Site is live and working
 - No known issues
-- Launched January 16, 2026 (one week ago)
+- Originally launched January 16, 2026
+- Latest update: February 1, 2026
+
+## Recent Updates (February 1, 2026)
+
+### New Features
+- **Video Editing page** - Showcases video projects with HTML5 video player
+  - Production: editing_animations.html
+  - Writer mode: editing_animations_writer.html
+  - Features: Modal video player with controls, thumbnail, project info, easter egg (draggable duck)
+  - First project: Ren Gill's "Vincent's Tale: Starry Night" - UCI Kingdom soundtrack
+
+### Menu Updates
+- Changed menu button text from "Nav" to "Navigate" for clarity
+- Updated menu button width to 125px (production) and 123px (writer mode left column)
+- Added "Video & Animation" link to main navigation
+- Updated all WRITER_MODE_PAGE_MAP entries in menu.js and menu_writer.js
+- Menu button styling now uniform across all pages
+
+### Cache Version History
+- 3.2 → 3.3 → 3.4 → 3.5 → 3.6 → 3.7 → 3.8 → 3.9 → 4.0 (menu integration)
+- 4.0 → 4.1 (production "Navigate" button and styling)
+- 4.1 → 4.2 (writer mode button width adjustments)
+
+### Styling Refinements
+- Adjusted menu button widths for better visual balance
+- Navigate button: 125px wide
+- Production menu items: 155px wide
+- Writer mode main column: 123px wide (adjusted up 8px from 115px)
+- Writer mode Sound button: 155px wide (special #muteToggle styling)

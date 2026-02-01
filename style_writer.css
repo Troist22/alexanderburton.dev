@@ -99,8 +99,11 @@ body {
 }
 
 .menu-item {
-    width: 120px;
+    display: block !important;
+    width: 360px !important;
     padding: 12px;
+    white-space: normal;
+    word-wrap: break-word;
     background: linear-gradient(135deg, var(--brown-light) 0%, var(--brown-med) 100%);
     color: var(--primary-color);
     text-decoration: none;
@@ -132,14 +135,7 @@ body {
     position: absolute;
     left: 156px;
     top: 0;
-    width: auto !important;
-    white-space: nowrap;
-}
-
-#muteToggle {
-    width: 148px !important;
-    padding: 12px !important;
-    box-sizing: border-box;
+    width: 160px !important;
 }
 
 .volume-control {
@@ -395,9 +391,13 @@ main {
 
 /* Force consistent menu item sizing */
 .menu-item {
-    width: 120px !important;
+    width: 125px !important;
     padding: 12px !important;
     font-size: 18px !important;
+}
+
+#muteToggle {
+    width: 155px !important;
 }
 
 /* Ensure images are responsive */
@@ -693,5 +693,202 @@ html {
         padding: 15px 12px;
         font-size: 13px;
         line-height: 1.6;
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   VIDEO MODAL: Popup player with fullscreen support
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.video-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(212, 165, 116, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    padding: 20px;
+    box-sizing: border-box;
+    backdrop-filter: blur(3px);
+}
+
+.video-modal-content {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    background-color: var(--parchment);
+    border: 3px solid var(--brown-dark);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow-xl) rgba(0, 0, 0, 0.5);
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+}
+
+.video-container video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+}
+
+.video-close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: var(--brown-med);
+    color: var(--primary-color);
+    border: 2px solid var(--brown-dark);
+    font-size: 32px;
+    cursor: pointer;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    z-index: 2001;
+    transition: all 0.3s ease;
+}
+
+.video-close-btn:hover {
+    background-color: var(--brown-dark);
+    box-shadow: var(--shadow-lg) rgba(0, 0, 0, 0.4);
+    transform: scale(1.1);
+}
+
+.video-fullscreen-btn {
+    position: absolute;
+    top: 15px;
+    right: 70px;
+    background-color: var(--brown-med);
+    color: var(--primary-color);
+    border: 2px solid var(--brown-dark);
+    font-size: 20px;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 4px;
+    z-index: 2001;
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+
+.video-fullscreen-btn:hover {
+    background-color: var(--brown-dark);
+    box-shadow: var(--shadow-md) rgba(0, 0, 0, 0.4);
+    transform: scale(1.05);
+}
+
+.video-info {
+    padding: 20px;
+    background-color: rgba(212, 165, 116, 0.15);
+    border-top: 2px solid var(--brown-med);
+    color: var(--primary-color);
+}
+
+.video-info h3 {
+    margin: 0 0 10px 0;
+    font-size: 18px;
+    color: var(--brown-dark);
+    font-family: var(--font-main);
+    font-weight: bold;
+}
+
+.video-info p {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--primary-color);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   VIDEO PROJECT TILE: Enhanced hover for expandable descriptions
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.portfolio-tile.video-project {
+    cursor: pointer;
+}
+
+.portfolio-tile.video-project:hover {
+    transform: scale(1.02);
+}
+
+.video-overlay {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    min-height: 300px;
+}
+
+.video-overlay .tile-description {
+    max-height: 100%;
+    overflow-y: auto;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.video-overlay a {
+    color: #0066cc;
+    text-decoration: underline;
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+
+.video-overlay a:visited {
+    color: #800080;
+}
+
+.video-overlay a:hover {
+    color: #0052a3;
+}
+
+@media (max-width: 768px) {
+    .video-modal {
+        padding: 10px;
+    }
+
+    .video-modal-content {
+        max-width: 100%;
+    }
+
+    .video-close-btn,
+    .video-fullscreen-btn {
+        font-size: 20px;
+        width: 40px;
+        height: 40px;
+        top: 10px;
+    }
+
+    .video-close-btn {
+        right: 10px;
+    }
+
+    .video-fullscreen-btn {
+        right: 55px;
+    }
+
+    .video-info {
+        padding: 15px;
+    }
+
+    .video-info h3 {
+        font-size: 15px;
+    }
+
+    .video-info p {
+        font-size: 12px;
     }
 }

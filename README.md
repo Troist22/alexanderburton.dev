@@ -16,6 +16,7 @@ What's included:
 - A way to test changes before pushing them live
 - Works on phones and desktop
 - SEO stuff so search engines can find it
+- Video portfolio page showcasing creative work
 
 ---
 
@@ -27,6 +28,7 @@ alexanderburton.dev/
 │   ├── index.html              # Homepage
 │   ├── about_me.html           # Professional background
 │   ├── software.html           # Project portfolio
+│   ├── editing_animations.html # Video editing & creative work
 │   ├── my_journey.html         # Blog/career narrative
 │   ├── nav.html                # Navigation menu (cached)
 │   ├── style.css               # Global stylesheet
@@ -35,6 +37,7 @@ alexanderburton.dev/
 │
 ├── Writer Mode (Local Editing)
 │   ├── index_writer.html, about_me_writer.html, etc.
+│   ├── editing_animations_writer.html
 │   ├── style_writer.css
 │   ├── menu_writer.js, nav_loaderwriter.js
 │   └── nav_writer.html
@@ -87,16 +90,24 @@ Mobile-friendly. Tested on phones and tablets.
 ## How to Make Changes
 
 ### Add a Blog Post
-1. Edit my_journey.html with your new blog post
+1. Edit my_journey_writer.html with your new blog post
 2. Test it in the browser
-3. Done. Commit and push.
+3. Copy changes to my_journey.html
+4. Commit and push.
 
 ### Change the Menu
-1. Edit nav.html
-2. Go to nav-loader.js
-3. Change NAV_CACHE_VERSION from 3.2 to 3.3 (or whatever's next)
-4. Commit and push
-5. On your next page load, you'll get the new nav
+1. Edit nav_writer.html
+2. Go to nav_loaderwriter.js
+3. Change NAV_CACHE_VERSION (currently at 4.2)
+4. Test in writer mode, then copy to nav.html and nav-loader.js
+5. Users will get the new menu on their next page load
+
+### Add a Video Project
+1. Create editing_animations_writer.html with your project
+2. Add video files to assets/videos/
+3. Add thumbnails to assets/thumbnails/
+4. Test in writer mode
+5. Copy to editing_animations.html when ready
 
 ### Change Colors
 Edit style.css at the top where it says `:root`. Change the hex colors. Everything else updates automatically.
