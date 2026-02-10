@@ -392,8 +392,9 @@ main {
 
 .about-portrait {
     display: block;
-    width: auto;
+    width: 260px;
     height: auto;
+    max-width: 80vw;
     border-radius: 8px;
     border: 3px solid var(--primary-green);
     box-shadow: var(--glow-md) rgba(0,255,65,0.2);
@@ -432,6 +433,11 @@ main {
     .menu-item {
         padding: 14px !important;
         min-height: 48px;
+    }
+
+    .about-portrait {
+        width: 220px;
+        max-width: 70vw;
     }
 }
 
@@ -479,6 +485,11 @@ main {
     
     .about-gallery {
         gap: 12px;
+    }
+
+    .about-portrait {
+        width: 180px;
+        max-width: 85vw;
     }
     
     /* Make duck more visible and easier to tap on mobile */
